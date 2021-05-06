@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <stdexcept>
 
 #include "ClassTP1.hpp"
 #include "Generic_station_parser.hpp"
@@ -24,7 +25,7 @@ void ClassTP1 :: read_stations(const std::string& _filename) {
     fstream ip(_filename);
     
     // ouvrir le fichier
-    if(!ip.is_open()) std::cout<<"Error: File Open"<<std::endl;
+    if(!ip.is_open()) throw std::runtime_error("Error: Can not File Open");
 
     //déclarer les variable qui vont contenir les données du CSV
     std::string name, line_id, adress,line_name, id;
@@ -42,7 +43,7 @@ void ClassTP1 :: read_stations(const std::string& _filename) {
         std::getline(ip,line_name,'\n');
       
 
-        if (id.compare(" ") == 0) {
+        if (ip.eof()) {
 			break;
 		}
 
@@ -71,7 +72,7 @@ void ClassTP1::read_connections(const std::string& _filename){
     fstream ip(_filename);
 
     //ouvrir le fichier:
-    if(ip.is_open()) std::cout<<"Error: File Open"<<std::endl;
+    if(!ip.is_open()) throw std::runtime_error("Error: Can not File Open");
 
     //déclarer les vriables qui vont contenir les données du fichier:
     std::string from_stop_id, to_stop_id, transfer_time;
@@ -89,17 +90,19 @@ void ClassTP1::read_connections(const std::string& _filename){
         std::getline(ip,to_stop_id,',');
         std::getline(ip,transfer_time,'\n');
 
-        if (from_stop_id.compare(" ") == 0) {
+        //vérifier la fin du fichier avant d'affecter:
+        if (ip.eof()) {
 			break;
 		}
 
         //convertir en uint64:
-        from_stop_id_value=std::stoull(from_stop_id);
-        to_stop_id_value=std::stoull(to_stop_id);
-        transfer_time_value=std::stoull(transfer_time);
+        from_stop_id_value=std::stoll(from_stop_id);
+        to_stop_id_value=std::stoll(to_stop_id);
+        transfer_time_value=std::stoll(transfer_time);
        
-        connections_hashmap[from_stop_id_value][to_stop_id_value]=transfer_time_value;
-        std::cout<<from_stop_id_value<<to_stop_id_value<<transfer_time_value<<std::endl;
+        this->connections_hashmap[from_stop_id_value][to_stop_id_value]=transfer_time_value;
+
+        std::cout<<from_stop_id_value<<" , "<<to_stop_id_value<<" , "<<transfer_time_value<<std::endl;
     }
     //close the file:
     ip.close();
