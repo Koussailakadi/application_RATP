@@ -18,36 +18,40 @@ void ClassTP1 :: afficher() const {
 
 void ClassTP1 :: read_stations(const std::string& _filename) {
     fstream ip(_filename);
-
+    
+    // ouvrir le fichier
     if(!ip.is_open()) std::cout<<"Error: File Open"<<std::endl;
 
-    std::string name, line_id, adress,line_name, direction;
+    //déclarer les variable qui vont contenir les données du CSV
+    std::string name, line_id, adress,line_name, id;
+
+    //se débarassé de la premiere ligne:
+    std::string ligne = "";
+	std::getline(ip, ligne);
 
     while (ip.good()){
         
         std::getline(ip,name,',');
+        std::getline(ip,id,',');
         std::getline(ip,line_id,',');
         std::getline(ip,adress,',');
-        std::getline(ip,line_name,',');
-        std::getline(ip,direction,'\n');
+        std::getline(ip,line_name,'\n');
+      
 
+        if (id.compare("") == 0) {
+			break;
+		}
 
 	    travel::Station station;
         station.name=name;
         station.line_id =line_id;
 		station.address = adress;
 		station.line_name = line_name;
-		station.direction = direction;
+	
 
         std::cout<<station<<std::endl;
-		//stations_hashmap[stoll(line_id)] = station;
-	
-        //std::cout<<"Name   "<<"line_id   "<<"adress   "<<"line_name"<<std::endl;
-        //std::cout<<name;
-        //std::cout<<line_id;
-        //std::cout<<adress;
-        //std::cout<<line_name;
-        //std::cout<<direction<<std::endl;
+
+		this->stations_hashmap[stoll(id)] = station;
 
     }
     

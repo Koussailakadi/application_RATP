@@ -10,7 +10,6 @@ namespace travel{
     std::string line_id;
     std::string address;
     std::string line_name;
-    std::string direction;
     friend std::ostream& operator<<(std::ostream& _os, const Station& _stop){
       _os << "Station: " << _stop.name << " (line " << _stop.line_id << ")";
       return _os;
