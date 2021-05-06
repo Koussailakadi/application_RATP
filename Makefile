@@ -1,9 +1,9 @@
-CXXFLAGS=-Wall -Wextra -Werror -g
+CXXFLAGS=-std=c++11 -Wall -Wextra -Werror -g
 
 all: main 
 
-main: main.cpp 
-	g++ $(CXXFLAGS) -o projet main.cpp ClassTP1.cpp ClassTP1.hpp 
+main: main.cpp Grade.o ClassTP1.cpp 
+	g++ $(CXXFLAGS) -o projet main.cpp ClassTP1.cpp Grade.o
 
 clean:
-	rm main
+	rm main 

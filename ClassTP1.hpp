@@ -8,7 +8,6 @@
 
     using namespace std;
   
-    //inclure la class mère (dans un dossier)
     #include "Generic_station_parser.hpp" 
 
     class ClassTP1 : public travel::Generic_station_parser {

@@ -1,15 +1,15 @@
 #include <iostream>
-using namespace std;
+
 
 #include "ClassTP1.hpp"
 #include "Generic_station_parser.hpp"
-//#include "Grade.hpp"
+#include "Grade.hpp"
 
 
 int main(){
 
     //TP1 partie 1:
-    cout<<"\n************************"<<endl;
+    std::cout<<"\n************************"<<endl;
 
     ClassTP1 a;
     a.afficher();
@@ -17,7 +17,7 @@ int main(){
 
     
     //obj grade;
-    //travel::Grade G(true);
+    travel::Grade G(true);
+    G.stations(a);
     
-
 }

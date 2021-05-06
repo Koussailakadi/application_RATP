@@ -31,15 +31,28 @@ void ClassTP1 :: read_stations(const std::string& _filename) {
         std::getline(ip,line_name,',');
         std::getline(ip,direction,'\n');
 
-        std::cout<<"Name   "<<"line_id   "<<"adress   "<<"line_name"<<std::endl;
-        std::cout<<name;
-        std::cout<<line_id;
-        std::cout<<adress;
-        std::cout<<line_name;
-        std::cout<<direction<<std::endl;
+
+	    travel::Station station;
+        station.name=name;
+        station.line_id =line_id;
+		station.address = adress;
+		station.line_name = line_name;
+		station.direction = direction;
+
+        std::cout<<station<<std::endl;
+		//stations_hashmap[stoll(line_id)] = station;
+	
+        //std::cout<<"Name   "<<"line_id   "<<"adress   "<<"line_name"<<std::endl;
+        //std::cout<<name;
+        //std::cout<<line_id;
+        //std::cout<<adress;
+        //std::cout<<line_name;
+        //std::cout<<direction<<std::endl;
 
     }
+    
     //fermer le fichier:
     ip.close();
 
 }
+
