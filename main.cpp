@@ -3,7 +3,7 @@ using namespace std;
 
 #include "ClassTP1.hpp"
 #include "Generic_station_parser.hpp"
-//#include "archive_etudiant/Grade.hpp"
+#include "archive_etudiant/Grade.hpp"
 
 
 int main(){
@@ -17,7 +17,7 @@ int main(){
 
     
     //obj grade;
-    //travel::Grade G(true);
+    travel::Grade G(true);
     
 
 }
