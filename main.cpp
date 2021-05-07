@@ -14,16 +14,16 @@ int main(){
 
     ClassTP1 a;
     a.afficher();
-    a.read_stations("data/stations.csv");
+    a.read_stations("data/s.csv");
 
     
     //obj grade;
-    travel::Grade G1(true);
+    travel::Grade G1(false);
     G1.stations(a);
 
     //lire les connections:
-    travel::Grade G2(true);
-    a.read_connections("data/connections.csv");
+    travel::Grade G2(false);
+    a.read_connections("data/c.csv");
     G2.connections(a);
     
 }

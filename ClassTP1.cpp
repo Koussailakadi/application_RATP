@@ -8,7 +8,7 @@
 #include "Generic_connection_parser.hpp"
 #include "Generic_mapper.hpp"
 
-
+using namespace std;
 
 //constructeur:
 ClassTP1 :: ClassTP1(){cout<<"ClassTP1"<<endl;}
@@ -43,10 +43,6 @@ void ClassTP1 :: read_stations(const std::string& _filename) {
         std::getline(ip,line_name,'\n');
       
 
-        if (ip.eof()) {
-			break;
-		}
-
 	    travel::Station station;
         station.name=name;
         station.line_id =line_id;
@@ -55,8 +51,12 @@ void ClassTP1 :: read_stations(const std::string& _filename) {
 	
 
         std::cout<<station<<std::endl;
-
 		this->stations_hashmap[stoll(id)] = station;
+
+        //end of file 
+        if (ip.eof()) {
+			break;
+		}
 
     }
 
@@ -78,7 +78,7 @@ void ClassTP1::read_connections(const std::string& _filename){
     std::string from_stop_id, to_stop_id, transfer_time;
 
     //convertir:
-    uint64_t from_stop_id_value,to_stop_id_value, transfer_time_value; 
+    //uint64_t from_stop_id_value,to_stop_id_value, transfer_time_value; 
 
 
     //se débarasser de la premiere ligne:
@@ -86,23 +86,26 @@ void ClassTP1::read_connections(const std::string& _filename){
     std::getline(ip,line); 
 
     while(ip.good()){
+
         std::getline(ip,from_stop_id,',');
         std::getline(ip,to_stop_id,',');
         std::getline(ip,transfer_time,'\n');
+
+        
+        //convertir en uint64:
+        //from_stop_id_value=std::stoll(from_stop_id);
+        //to_stop_id_value=std::stoll(to_stop_id);
+        //transfer_time_value=std::stoll(transfer_time);
 
         //vérifier la fin du fichier avant d'affecter:
         if (ip.eof()) {
 			break;
 		}
-
-        //convertir en uint64:
-        from_stop_id_value=std::stoll(from_stop_id);
-        to_stop_id_value=std::stoll(to_stop_id);
-        transfer_time_value=std::stoll(transfer_time);
        
-        this->connections_hashmap[from_stop_id_value][to_stop_id_value]=transfer_time_value;
+        this->connections_hashmap[stoll(from_stop_id)][stoll(to_stop_id)]=stoll(transfer_time);
+        std::cout<<from_stop_id<<" , "<<to_stop_id<<" , "<<transfer_time<<std::endl;
 
-        std::cout<<from_stop_id_value<<" , "<<to_stop_id_value<<" , "<<transfer_time_value<<std::endl;
+       
     }
     //close the file:
     ip.close();
