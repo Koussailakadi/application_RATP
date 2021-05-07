@@ -1,8 +1,8 @@
 #include <iostream>
 
 
-#include "ClassTP1.hpp"
-#include "Generic_station_parser.hpp"
+#include "RATP.hpp"
+//#include "Generic_station_parser.hpp"
 #include "Generic_connection_parser.hpp"
 #include "Grade.hpp"
 
@@ -12,7 +12,7 @@ int main(){
     //TP1 partie 1:
     std::cout<<"\n************************"<<endl;
 
-    ClassTP1 a;
+    RATP a;
     a.afficher();
     a.read_stations("data/s.csv");
 

@@ -3,7 +3,7 @@
 #include <string>
 #include <stdexcept>
 
-#include "ClassTP1.hpp"
+#include "RATP.hpp"
 #include "Generic_station_parser.hpp"
 #include "Generic_connection_parser.hpp"
 #include "Generic_mapper.hpp"
@@ -11,17 +11,17 @@
 using namespace std;
 
 //constructeur:
-ClassTP1 :: ClassTP1(){cout<<"ClassTP1"<<endl;}
-ClassTP1 :: ~ClassTP1(){cout<<"~ClassTP1"<<endl;}
+RATP :: RATP(){cout<<"RATP"<<endl;}
+RATP :: ~RATP(){cout<<"~RATP"<<endl;}
 
 //méthodes:
-void ClassTP1 :: afficher() const {
+void RATP :: afficher() const {
     std::cout<<"affichage: "<<std::endl;
 }
 
 
 // read station:
-void ClassTP1 :: read_stations(const std::string& _filename) {
+void RATP :: read_stations(const std::string& _filename) {
     fstream ip(_filename);
     
     // ouvrir le fichier
@@ -68,7 +68,7 @@ void ClassTP1 :: read_stations(const std::string& _filename) {
 
 
 //read the connections:
-void ClassTP1::read_connections(const std::string& _filename){
+void RATP::read_connections(const std::string& _filename){
     fstream ip(_filename);
 
     //ouvrir le fichier:
