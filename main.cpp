@@ -10,7 +10,7 @@
 int main(){
 
     //TP1 partie 1:
-    std::cout<<"\n************************"<<endl;
+    std::cout<<"\n************************"<<std::endl;
 
     RATP a;
     a.afficher();
@@ -26,4 +26,5 @@ int main(){
     a.read_connections("data/c.csv");
     G2.connections(a);
     
+    a.compute_travel(124,123);
 }
