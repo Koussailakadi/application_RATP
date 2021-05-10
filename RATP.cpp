@@ -6,7 +6,7 @@
 #include "RATP.hpp"
 #include "Generic_station_parser.hpp"
 #include "Generic_connection_parser.hpp"
-#include "Generic_mapper.hpp"
+//#include "Generic_mapper.hpp"
 
 using namespace std;
 
@@ -78,7 +78,7 @@ void RATP::read_connections(const std::string& _filename){
     std::string from_stop_id, to_stop_id, transfer_time;
 
     //convertir:
-    //uint64_t from_stop_id_value,to_stop_id_value, transfer_time_value; 
+    uint64_t from_stop_id_value,to_stop_id_value, transfer_time_value; 
 
 
     //se débarasser de la premiere ligne:
@@ -91,18 +91,18 @@ void RATP::read_connections(const std::string& _filename){
         std::getline(ip,to_stop_id,',');
         std::getline(ip,transfer_time,'\n');
 
-        
-        //convertir en uint64:
-        //from_stop_id_value=std::stoll(from_stop_id);
-        //to_stop_id_value=std::stoll(to_stop_id);
-        //transfer_time_value=std::stoll(transfer_time);
-
         //vérifier la fin du fichier avant d'affecter:
         if (ip.eof()) {
 			break;
 		}
-       
-        this->connections_hashmap[stoll(from_stop_id)][stoll(to_stop_id)]=stoll(transfer_time);
+
+        //convertir en uint64:
+        from_stop_id_value=std::stoull(from_stop_id);
+        to_stop_id_value=std::stoull(to_stop_id);
+        transfer_time_value=std::stoull(transfer_time);
+
+        
+        this->connections_hashmap[from_stop_id_value][to_stop_id_value]=transfer_time_value;
         std::cout<<from_stop_id<<" , "<<to_stop_id<<" , "<<transfer_time<<std::endl;
 
        
@@ -112,3 +112,52 @@ void RATP::read_connections(const std::string& _filename){
 }
 
 
+
+//----------------------------------------------------------------------
+std::vector<std::pair<uint64_t,uint64_t> > RATP::compute_travel(uint64_t _start, uint64_t _end){
+	// retourner le court chemin, avec l'algorithme de dijkstra
+	std::vector<std::pair < uint64_t, uint64_t> >  Vect_travel;
+
+    std::unordered_map<uint64_t, travel::Station> stations_hashmap;
+    stations_hashmap=get_stations_hashmap();
+    std::cout<<stations_hashmap[2191]<<std::endl;
+
+    std::unordered_map<uint64_t,std::unordered_map<uint64_t,uint64_t> > connections_hashmap;
+    connections_hashmap=get_connections_hashmap();
+
+    auto p = std::make_pair(_start,_end);
+    Vect_travel.push_back(p);
+    return Vect_travel;
+}
+
+
+std::vector<std::pair<uint64_t,uint64_t> > RATP::compute_and_display_travel(uint64_t _start, uint64_t _end){
+    // retourner [id1, id2]= time
+
+	std::vector<std::pair < uint64_t, uint64_t> >  Vect_travel;
+    auto p = std::make_pair(_start,_end);
+    Vect_travel.push_back(p);
+
+    return Vect_travel;
+}
+
+// recherche par string:
+std::vector<std::pair<uint64_t, uint64_t> > RATP::compute_travel(const std::string& _start, const std::string& _end){
+    std::vector<std::pair < uint64_t, uint64_t> >  Vect_travel;
+    std::cout<<_start<<_end<<std::endl;
+    auto p = std::make_pair(100,2000);
+    Vect_travel.push_back(p);
+
+    return Vect_travel;
+
+   }
+
+std::vector<std::pair<uint64_t, uint64_t> > RATP::compute_and_display_travel(const std::string& _start=" ", const std::string& _end=" "){
+    std::vector<std::pair < uint64_t, uint64_t> >  Vect_travel;
+    std::cout<<_start<<_end<<std::endl;
+    auto p = std::make_pair(100,2000);
+    Vect_travel.push_back(p);
+
+    return Vect_travel;
+
+}
