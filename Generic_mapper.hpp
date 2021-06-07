@@ -17,5 +17,6 @@ namespace travel{
     virtual std::vector<std::pair<uint64_t,uint64_t> > compute_and_display_travel(const std::string&, const std::string&){
       throw("Nothing here");
     }
+  
   };
 }

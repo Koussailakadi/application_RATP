@@ -20,7 +20,6 @@ class RATP : public travel::Generic_mapper{
     public:
         RATP ();
         ~RATP();
-        void afficher() const;
         void read_stations(const std::string& _filename) override;
         void read_connections(const std::string& _filename) override;
 
@@ -32,6 +31,11 @@ class RATP : public travel::Generic_mapper{
         //Meme methode mais qui travaille avec le nom des station plutot que leurs ID
         std::vector<std::pair<uint64_t, uint64_t> > compute_travel(const std::string&, const std::string&) override;
         std::vector<std::pair<uint64_t, uint64_t> > compute_and_display_travel(const std::string&, const std::string&) override;
+
+        // additionnal functions:
+        void AfficherStation();
+        bool isStation(const std::string& station);
+        uint64_t getId(const std::string& name);
     
 };
 
